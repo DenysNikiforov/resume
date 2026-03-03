@@ -1,0 +1,130 @@
+:root {
+    --primary: #1e3a8a; /* Темно-синій */
+    --accent: #3b82f6;
+    --text: #1f2937;
+    --sidebar-bg: #f3f4f6;
+}
+
+* { box-sizing: border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background: #d1d5db;
+    margin: 0; padding: 20px;
+    color: var(--text);
+}
+
+.cv-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    display: flex;
+    min-height: 297mm; /* Формат А4 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 300px;
+    background: var(--sidebar-bg);
+    padding: 40px 25px;
+    border-right: 1px solid #e5e7eb;
+}
+
+.photo {
+    width: 100px; height: 100px;
+    background: var(--primary);
+    border-radius: 12px;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+}
+
+.sidebar h1 {
+    font-size: 22px; text-align: center;
+    margin: 0; color: var(--primary);
+    line-height: 1.2;
+}
+
+.tagline {
+    text-align: center; font-size: 12px;
+    color: var(--accent); text-transform: uppercase;
+    margin-top: 5px; font-weight: 600;
+}
+
+.side-block { margin-top: 35px; }
+.side-block h3 {
+    font-size: 14px; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 5px; margin-bottom: 15px;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.item { display: flex; align-items: center; gap: 10px; font-size: 13px; margin-bottom: 8px; }
+.skills-list { padding-left: 15px; font-size: 13px; }
+.skills-list li { margin-bottom: 8px; }
+
+/* MAIN */
+.main { flex: 1; padding: 40px; }
+.section-title {
+    font-size: 18px; text-transform: uppercase;
+    color: var(--primary); border-bottom: 1px solid #eee;
+    padding-bottom: 10px; margin-bottom: 20px;
+}
+
+.job-card { margin-bottom: 25px; }
+.job-header h3 { margin: 0; font-size: 16px; color: var(--text); }
+.company { display: block; color: var(--accent); font-weight: 600; font-size: 14px; }
+.date { font-size: 12px; color: #6b7280; font-style: italic; }
+
+ul { padding-left: 18px; margin-top: 10px; }
+ul li { font-size: 13.5px; margin-bottom: 6px; line-height: 1.5; }
+
+/* PRINT */
+@media print {
+    body { background: white; padding: 0; }
+    .cv-container { box-shadow: none; width: 100%; }
+    .no-print { display: none; }
+}
+
+.btn-print {
+    background: var(--primary); color: white; border: none;
+    padding: 10px 20px; border-radius: 6px; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; margin-top: 20px;
+}
+
+/* Додаткові стилі до попереднього коду */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tech-tags span {
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.it-section {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px dashed var(--accent);
+}
+
+.job-summary {
+    font-size: 13px;
+    color: #4b5563;
+    margin: 5px 0 10px 0;
+    font-style: italic;
+}
+
+.sidebar .profile h1 {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
