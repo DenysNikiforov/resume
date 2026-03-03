@@ -3,208 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резюме - Денис Нікіфоров</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css">
+    <title>Денис Нікіфоров — CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Ефект сітки на фоні --- */
-        body {
-            background-color: #f8fafc;
-            background-image: 
-                linear-gradient(to right, rgba(30, 58, 138, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 58, 138, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px; /* Розмір клітинки */
-            position: relative;
-            cursor: none; /* Ховаємо дефолтний курсор */
+        :root {
+            --ink: #0d1117;
+            --navy: #0f2549;
+            --steel: #1e4080;
+            --electric: #2563eb;
+            --mist: #f0f4fb;
+            --ash: #6b7280;
+            --line: #e2e8f0;
+            --white: #ffffff;
         }
 
-        /* --- Стильний кастомний курсор --- */
-        #cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #1e3a8a;
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none !important;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #dde3ec;
+            background-image:
+                linear-gradient(rgba(15,37,73,.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15,37,73,.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            padding: 48px 20px;
+            color: var(--ink);
+        }
+
+        #cur {
+            width: 7px; height: 7px;
+            background: var(--electric);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
         }
 
-        #cursor-outline {
-            width: 30px;
-            height: 30px;
-            border: 2px solid rgba(59, 130, 246, 0.5);
+        #cur-ring {
+            width: 28px; height: 28px;
+            border: 1.5px solid var(--electric);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9998;
-            transition: all 0.2s ease-out;
+            transform: translate(-50%, -50%);
+            transition: width .25s, height .25s, border-color .25s;
+            opacity: .6;
         }
 
-        /* Ефект при наведенні на посилання */
-        .tech-tags span:hover, a:hover, button:hover {
-            transform: scale(1.1);
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 297mm;
+            background: var(--white);
+            box-shadow: 0 32px 80px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.06);
         }
 
-        /* Робимо контейнер резюме трохи прозорим, щоб сітку було злегка видно */
-        .cv-container {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(5px);
+        /* ── SIDEBAR ──────────────────────────────── */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            background: var(--navy);
+            display: flex;
+            flex-direction: column;
             position: relative;
-            z-index: 10;
+        }
+
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -1px;
+            width: 1px; height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--electric) 30%, var(--electric) 70%, transparent);
+            opacity: .4;
+        }
+
+        .profile {
+            padding: 0;
+        }
+
+        .photo-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            filter: grayscale(20%) contrast(1.05);
+            display: block;
+        }
+
+        .photo-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: linear-gradient(transparent, var(--navy));
+        }
+
+        .name-plate {
+            padding: 24px 28px 20px;
+        }
+
+        .name-plate h1 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .name-plate .role {
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--electric);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .name-plate .role::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--electric);
+            flex-shrink: 0;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,.08);
+            margin: 0 28px;
+        }
+
+        .s-block {
+            padding: 24px 28px;
+        }
+
+        .s-block h3 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--electric);
+            margin-bottom: 14px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            stroke: var(--electric);
+            opacity: .8;
+        }
+
+        .contact-item span {
+            font-size: 13px;
+            color: rgba(255,255,255,.88);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .chip {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,.9);
+            background: rgba(37,99,235,.22);
+            border: 1px solid rgba(37,99,235,.4);
+            padding: 5px 11px;
+            border-radius: 3px;
+            letter-spacing: .3px;
+        }
+
+        .soft-list {
+            list-style: none;
+        }
+
+        .soft-list li {
+            font-size: 13px;
+            color: rgba(255,255,255,.82);
+            font-weight: 400;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .soft-list li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--electric);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── MAIN ──────────────────────────────────── */
+        .main {
+            flex: 1;
+            padding: 50px 48px;
+            min-width: 0;
+        }
+
+        .section {
+            margin-bottom: 42px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .section-head h2 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--steel);
+            white-space: nowrap;
+        }
+
+        .section-head::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .edu-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .edu-block h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.35;
+        }
+
+        .edu-block .meta {
+            font-size: 13px;
+            color: var(--ash);
+            white-space: nowrap;
+            margin-top: 4px;
+        }
+
+        .job {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .job:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .job-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .job-top h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .job-date {
+            font-size: 12px;
+            color: var(--ash);
+            font-style: italic;
+            white-space: nowrap;
+            margin-top: 4px;
+        }
+
+        .job-company {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--electric);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .job-lead {
+            font-size: 14px;
+            color: var(--ash);
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .job ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .job ul li {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.7;
+            margin-bottom: 7px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .job ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--electric);
+            font-weight: 700;
+        }
+
+        .job ul li strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .project-card {
+            background: var(--mist);
+            border-left: 3px solid var(--steel);
+            padding: 24px 28px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .project-card h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .project-card .job-lead {
+            margin-bottom: 10px;
+        }
+
+        .project-card ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .project-card ul li {
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 7px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .project-card ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--electric);
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .wrap { box-shadow: none; }
+            #cur, #cur-ring { display: none; }
+            * { cursor: default !important; }
         }
     </style>
 </head>
 <body>
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
 
-    <div class="cv-container">
-        <aside class="sidebar">
-            <div class="profile">
-        <div class="photo">
-            <img src="IMG_0002.webp" alt="Денис Нікіфоров">
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<div class="wrap">
+
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="photo-wrap">
+                <img src="IMG_1848.webp" alt="Денис Нікіфоров">
+            </div>
+            <div class="name-plate">
+                <h1>Денис<br>Нікіфоров</h1>
+                <p class="role">Energy Expert · Frontend Dev</p>
+            </div>
         </div>
-        <div class="name-block">
-            <h1>ДЕНИС <br>НІКІФОРОВ</h1>
+
+        <div class="divider"></div>
+
+        <div class="s-block">
+            <h3>Контакти</h3>
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.38a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>+380 97 208 4485</span>
+            </div>
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>denys.nikiforov@ukr.net</span>
+            </div>
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Київ, Україна</span>
+            </div>
         </div>
-        <p class="tagline">Energy Expert | Frontend Developer</p>
-    </div>
 
-            <div class="side-block">
-                <h3><i data-lucide="contact"></i> Контакти</h3>
-                <div class="item"><i data-lucide="phone" size="14"></i><span>+380 97 208 4485</span></div>
-                <div class="item"><i data-lucide="mail" size="14"></i><span>denys.nikiforov@ukr.net</span></div>
-                <div class="item"><i data-lucide="map-pin" size="14"></i><span>Київ, Україна</span></div>
+        <div class="divider"></div>
+
+        <div class="s-block">
+            <h3>Технологій</h3>
+            <div class="chips">
+                <span class="chip">HTML5 / CSS3</span>
+                <span class="chip">JavaScript ES6+</span>
+                <span class="chip">React.js</span>
             </div>
+        </div>
 
-            <div class="side-block">
-                <h3><i data-lucide="layers"></i> Стек технологій</h3>
-                <div class="tech-tags">
-                    <span>HTML5 / CSS3</span>
-                    <span>JavaScript (ES6+)</span>
-                    <span>React.js</span>
+        <div class="divider"></div>
+
+        <div class="s-block">
+            <h3>Інструменти</h3>
+            <div class="chips">
+                <span class="chip">Excel</span>
+                <span class="chip">1C:Підприємство</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="s-block">
+            <h3>Soft Skills</h3>
+            <ul class="soft-list">
+                <li>Ділові переговори</li>
+                <li>Аналіз великих даних</li>
+                <li>Управління фінпотоками</li>
+                <li>Орієнтація на результат</li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <section class="section">
+            <div class="section-head"><h2>Освіта</h2></div>
+            <div class="edu-block">
+                <div>
+                    <h3>Магістр — Електротехнічні системи живлення</h3>
+                    <p class="meta" style="margin-top:6px;">ХНУМГ ім. О.М. Бекетова</p>
                 </div>
+                <span class="meta">2021</span>
             </div>
+        </section>
 
-            <div class="side-block">
-                <h3><i data-lucide="settings"></i> Інструменти</h3>
-                <div class="tech-tags">
-                    <span>Excel</span>
-                    <span>1C:Підприємство</span>
+        <section class="section">
+            <div class="section-head"><h2>Досвід — Енергетика</h2></div>
+
+            <div class="job">
+                <div class="job-top">
+                    <h3>Головний фахівець з балансів та фінансових операцій</h3>
+                    <span class="job-date">02/2024 — тепер</span>
                 </div>
-            </div>
-
-            <div class="side-block">
-                <h3><i data-lucide="briefcase"></i> Soft Skills</h3>
-                <ul class="skills-list">
-                    <li>Ділові переговори</li>
-                    <li>Аналіз великих даних</li>
-                    <li>Управління фінпотоками</li>
-                    <li>Орієнтація на результат</li>
+                <span class="job-company">ТОВ «Дніпросталь-Енерго»</span>
+                <p class="job-lead">Забезпечення постачання ЕЕ та контроль фінансових операцій на ринку електроенергії.</p>
+                <ul>
+                    <li>Безперебійне постачання ЕЕ споживачам (МЗ «Дніпросталь»), стратегічний продаж ресурсів.</li>
+                    <li><strong>Фінансове планування:</strong> розробка Cash Flow планів та прогнозів.</li>
+                    <li><strong>Моніторинг:</strong> безперервний нагляд за витратами та дотриманням лімітів.</li>
+                    <li><strong>Оптимізація:</strong> оперативні зміни залежно від ринкових коливань цін.</li>
+                    <li><strong>Rollover:</strong> адміністрування процесів перенесення зобов'язань.</li>
+                    <li><strong>Комплаєнс:</strong> забезпечення фінансових гарантій для участі в ринку ЕЕ.</li>
+                    <li><strong>Звітність:</strong> щотижневий розрахунок нарахувань та верифікація актів.</li>
                 </ul>
             </div>
-        </aside>
 
-        <main class="main">
-            <section class="education">
-                <h2 class="section-title">Освіта</h2>
-                <div class="job-header">
-                    <h3>Магістр з електротехнічних систем живлення</h3>
-                    <span class="company">ХНУМГ ім. О.М. Бекетова, 2021</span>
+            <div class="job">
+                <div class="job-top">
+                    <h3>Старший фахівець</h3>
+                    <span class="job-date">09/2022 — 02/2024</span>
                 </div>
-            </section>
+                <span class="job-company">ТОВ «Твій Газзбут»</span>
+                <ul>
+                    <li>Управління відділом взаємодії з ОСР, розробка бізнес-процесів зміни постачальника.</li>
+                    <li>Контроль фінансових операцій між ОСР та суміжними постачальниками.</li>
+                    <li>Балансування споживання ЕЕ за об'єктами обліку (групи А та Б).</li>
+                    <li>Адміністрування даних на платформі <strong>MMS</strong>.</li>
+                </ul>
+            </div>
+        </section>
 
-            <section class="experience">
-                <h2 class="section-title">Професійний досвід (Енергетика)</h2>
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>Головний фахівець з балансів та фін. операцій</h3>
-                        <span class="company">ТОВ "ДНІПРОСТАЛЬ-ЕНЕРГО"</span>
-                        <span class="date">02/2024 — Теперішній час</span>
-                    </div>
-                    <p class="job-summary">Забезпечення постачання енергії та контроль фінансових операцій на ринку ЕЕ.</p>
-                    <ul>
-                        <li>Забезпечення безперебійного постачання ЕЕ споживачам (МЗ «Дніпросталь») та підтримка комерційної діяльності через стратегічний продаж ресурсів.</li>
-                        <li><strong>Фінансове планування та прогнозування:</strong> розробка планів руху грошових коштів (Cash Flow).</li>
-                        <li><strong>Контроль та моніторинг:</strong> безперервний нагляд за витратами та дотриманням лімітів.</li>
-                        <li><strong>Коригування та оптимізація:</strong> оперативне внесення змін залежно від ринкових коливань цін.</li>
-                        <li><strong>Управління перенесеннями:</strong> адміністрування процесів перенесення (rollover) зобов'язань.</li>
-                        <li><strong>Фінансовий комплаєнс:</strong> забезпечення фінансових гарантій для участі в ринку ЕЕ.</li>
-                        <li><strong>Аналітична звітність:</strong> щотижневий розрахунок нарахувань та верифікація актів.</li>
-                    </ul>
-                </div>
+        <section class="section">
+            <div class="section-head"><h2>IT Проекти — EnergyTech</h2></div>
+            <div class="project-card">
+                <h3>Developer · Billing System</h3>
+                <p class="job-lead">Розробка білінгової фінансової системи для енергетичного сектору (Pet Project).</p>
+                <ul>
+                    <li>Проєктування архітектури автоматичного виставлення рахунків за ЕЕ.</li>
+                    <li>Реалізація логіки формування балансів на основі ринкових даних.</li>
+                    <li>Модулі моніторингу фінансових потоків.</li>
+                </ul>
+            </div>
+        </section>
 
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>Старший фахівець</h3>
-                        <span class="company">ТОВ "ТВІЙ ГАЗЗБУТ"</span>
-                        <span class="date">09/2022 — 02/2024</span>
-                    </div>
-                    <ul>
-                        <li>Управління відділом взаємодії з ОСР та розробка бізнес-процесів для зміни постачальника.</li>
-                        <li>Контроль фінансових операцій між ОСР та суміжними постачальниками.</li>
-                        <li>Балансування споживання ЕЕ за об’єктами обліку (групи А та Б).</li>
-                        <li>Адміністрування даних на платформі <strong>MMS</strong>.</li>
-                    </ul>
-                </div>
-            </section>
+    </main>
+</div>
 
-            <section class="it-section">
-                <h2 class="section-title">IT Проекти (EnergyTech)</h2>
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>Developer | Billing System Project</h3>
-                    </div>
-                    <p class="job-summary">Розробка білінгової фінансової системи для енергетичного сектору (Pet Project).</p>
-                    <ul>
-                        <li>Проєктування архітектури для автоматичного виставлення рахунків за ЕЕ.</li>
-                        <li>Реалізація логіки формування балансів на основі ринкових даних.</li>
-                        <li>Створення модулів моніторингу фінансових потоків.</li>
-                    </ul>
-                </div>
-            </section>
-        </main>
-    </div>
+<script>
+  
+</script>
 
-    <script>
-        lucide.createIcons();
-
-        const dot = document.getElementById('cursor-dot');
-        const outline = document.getElementById('cursor-outline');
-
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            // Рух основної точки
-            dot.style.left = `${posX}px`;
-            dot.style.top = `${posY}px`;
-
-            // Рух контуру з невеликою затримкою
-            outline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-
-        // Ефект збільшення на інтерактивних елементах
-        document.querySelectorAll('.tech-tags span, .job-card').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                outline.style.transform = 'scale(2)';
-                outline.style.borderColor = '#1e3a8a';
-            });
-            item.addEventListener('mouseleave', () => {
-                outline.style.transform = 'scale(1)';
-                outline.style.borderColor = 'rgba(59, 130, 246, 0.5)';
-            });
-        });
-    </script>
 </body>
 </html>
-
-
 
 
 
