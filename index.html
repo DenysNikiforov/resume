@@ -7,8 +7,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Ефект сітки на фоні --- */
+        body {
+            background-color: #f8fafc;
+            background-image: 
+                linear-gradient(to right, rgba(30, 58, 138, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 58, 138, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px; /* Розмір клітинки */
+            position: relative;
+            cursor: none; /* Ховаємо дефолтний курсор */
+        }
+
+        /* --- Стильний кастомний курсор --- */
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #1e3a8a;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        #cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(59, 130, 246, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.2s ease-out;
+        }
+
+        /* Ефект при наведенні на посилання */
+        .tech-tags span:hover, a:hover, button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Робимо контейнер резюме трохи прозорим, щоб сітку було злегка видно */
+        .cv-container {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
     <div class="cv-container">
         <aside class="sidebar">
             <div class="profile">
@@ -37,7 +88,7 @@
 
             <div class="side-block">
                 <h3><i data-lucide="settings"></i> Інструменти</h3>
-                <div class="tech-tags">                
+                <div class="tech-tags">
                     <span>Excel</span>
                     <span>1C:Підприємство</span>
                 </div>
@@ -65,7 +116,6 @@
 
             <section class="experience">
                 <h2 class="section-title">Професійний досвід (Енергетика)</h2>
-                
                 <div class="job-card">
                     <div class="job-header">
                         <h3>Головний фахівець з балансів та фін. операцій</h3>
@@ -73,15 +123,15 @@
                         <span class="date">02/2024 — Теперішній час</span>
                     </div>
                     <p class="job-summary">Забезпечення постачання енергії та контроль фінансових операцій на ринку ЕЕ.</p>
-<ul>
-    <li>Забезпечення безперебійного постачання ЕЕ споживачам (зокрема МЗ «Дніпросталь») та підтримка комерційної діяльності через стратегічний продаж ресурсів.</li>
-    <li><strong>Фінансове планування та прогнозування:</strong> розробка планів руху грошових коштів (Cash Flow) для забезпечення розрахунків з ОСП та ОСР.</li>
-    <li><strong>Контроль та моніторинг:</strong> безперервний нагляд за витратами та надходженнями, контроль за дотриманням лімітів та цільовим використанням коштів за договорами.</li>
-    <li><strong>Коригування та оптимізація:</strong> оперативне внесення змін до планових показників залежно від фактичного споживання та ринкових коливань цін.</li>
-    <li><strong>Управління перенесеннями:</strong> адміністрування процесів перенесення (rollover) зобов'язань та платежів, координація взаєморозрахунків з контрагентами для мінімізації касових розривів.</li>
-    <li><strong>Фінансовий комплаєнс:</strong> забезпечення фінансових гарантій для участі в сегментах ринку ЕЕ та контроль своєчасного поповнення рахунків.</li>
-    <li><strong>Аналітична звітність:</strong> щотижневий розрахунок нарахувань, верифікація актів купівлі-продажу та формування планових об'ємів для звітності.</li>
-</ul>
+                    <ul>
+                        <li>Забезпечення безперебійного постачання ЕЕ споживачам (МЗ «Дніпросталь») та підтримка комерційної діяльності через стратегічний продаж ресурсів.</li>
+                        <li><strong>Фінансове планування та прогнозування:</strong> розробка планів руху грошових коштів (Cash Flow).</li>
+                        <li><strong>Контроль та моніторинг:</strong> безперервний нагляд за витратами та дотриманням лімітів.</li>
+                        <li><strong>Коригування та оптимізація:</strong> оперативне внесення змін залежно від ринкових коливань цін.</li>
+                        <li><strong>Управління перенесеннями:</strong> адміністрування процесів перенесення (rollover) зобов'язань.</li>
+                        <li><strong>Фінансовий комплаєнс:</strong> забезпечення фінансових гарантій для участі в ринку ЕЕ.</li>
+                        <li><strong>Аналітична звітність:</strong> щотижневий розрахунок нарахувань та верифікація актів.</li>
+                    </ul>
                 </div>
 
                 <div class="job-card">
@@ -92,10 +142,9 @@
                     </div>
                     <ul>
                         <li>Управління відділом взаємодії з ОСР та розробка бізнес-процесів для зміни постачальника.</li>
-                        <li>Контроль фінансових операцій між ОСР та суміжними постачальниками на відповідність нормам.</li>
+                        <li>Контроль фінансових операцій між ОСР та суміжними постачальниками.</li>
                         <li>Балансування споживання ЕЕ за об’єктами обліку (групи А та Б).</li>
-                        <li>Адміністрування та обробка номінаційних даних на платформі <strong>MMS</strong>.</li>
-                        <li>Розробка стратегічного графіку закупівель ЕЕ для економічної ефективності.</li>
+                        <li>Адміністрування даних на платформі <strong>MMS</strong>.</li>
                     </ul>
                 </div>
             </section>
@@ -109,14 +158,47 @@
                     <p class="job-summary">Розробка білінгової фінансової системи для енергетичного сектору (Pet Project).</p>
                     <ul>
                         <li>Проєктування архітектури для автоматичного виставлення рахунків за ЕЕ.</li>
-                        <li>Реалізація логіки формування балансів на основі ринкових даних та номінацій.</li>
-                        <li>Створення модулів моніторингу фінансових потоків та звірки даних з системами ОСП/ОСР.</li>
+                        <li>Реалізація логіки формування балансів на основі ринкових даних.</li>
+                        <li>Створення модулів моніторингу фінансових потоків.</li>
                     </ul>
                 </div>
             </section>
         </main>
     </div>
-    <script>lucide.createIcons();</script>
+
+    <script>
+        lucide.createIcons();
+
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Рух основної точки
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+
+            // Рух контуру з невеликою затримкою
+            outline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Ефект збільшення на інтерактивних елементах
+        document.querySelectorAll('.tech-tags span, .job-card').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                outline.style.transform = 'scale(2)';
+                outline.style.borderColor = '#1e3a8a';
+            });
+            item.addEventListener('mouseleave', () => {
+                outline.style.transform = 'scale(1)';
+                outline.style.borderColor = 'rgba(59, 130, 246, 0.5)';
+            });
+        });
+    </script>
 </body>
 </html>
 
